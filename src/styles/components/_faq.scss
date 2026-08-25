@@ -1,0 +1,10 @@
+.faq {
+  padding: 4rem 0;
+  background: var(--gray-light);
+
+  &__wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 1rem;
+  }
+}

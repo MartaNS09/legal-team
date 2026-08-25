@@ -1,0 +1,114 @@
+// ============================================
+// ИМПОРТ КОМПОНЕНТОВ (ВСЕ @use В САМОМ НАЧАЛЕ!)
+// ============================================
+@use './components/header';
+@use './components/hero';
+@use './components/services';
+@use './components/footer';
+@use './components/servicesSection';
+@use './components/articles';
+@use './components/lawyers';
+@use './components/faq';
+@use './components/service-pages';
+@use './components/services-page';
+
+// ============================================
+// 1. ПЕРЕМЕННЫЕ ТЕМ (светлая / темная)
+// ============================================
+:root {
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  --primary: #1a3a6b;
+  --primary-light: #2a5a9b;
+  --secondary: #c9a84c;
+  --gray-light: #f5f6fa;
+  --gray: #e0e0e0;
+  --gray-dark: #9ca3af;
+  --text-muted: #6b7280;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Georgia', 'Times New Roman', serif;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --background: #0d1117;
+  --foreground: #e6edf3;
+  --primary: #4a8ab5;
+  --primary-light: #6aa9d0;
+  --secondary: #e8c84a;
+  --gray-light: #1c2333;
+  --gray: #30363d;
+  --gray-dark: #484f58;
+  --text-muted: #8b949e;
+}
+
+// ============================================
+// 2. ГЛОБАЛЬНЫЕ СТИЛИ
+// ============================================
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color var(--transition), color var(--transition);
+  line-height: 1.6;
+  padding-top: 98px;
+}
+
+// ============================================
+// 3. УТИЛИТЫ
+// ============================================
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 4rem);
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--foreground);
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--secondary);
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+  }
+}
+
+// ============================================
+// 4. SKIP LINK (для скринридеров)
+// ============================================
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  z-index: 10000;
+  font-weight: 600;
+  
+  &:focus {
+    top: 0;
+  }
+}

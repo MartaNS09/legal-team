@@ -1,0 +1,143 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: var(--gray-light);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--gray);
+
+  &Title {
+    padding: 1rem 1.5rem;
+    background: var(--primary);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    font-family: var(--font-serif);
+  }
+
+  li {
+    border-bottom: 1px solid var(--gray);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.menuLink {
+  display: block;
+  padding: 0.6rem 1.5rem;
+  color: var(--foreground);
+  text-decoration: none;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+
+  &:hover {
+    background: var(--primary);
+    color: white;
+    padding-left: 2rem;
+  }
+}
+
+.callback {
+  background: var(--gray-light);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid var(--gray);
+
+  &Content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &Title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--foreground);
+    font-family: var(--font-serif);
+    text-align: center;
+  }
+
+  &Subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  &Form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  &Input {
+    padding: 0.6rem 1rem;
+    border: 2px solid var(--gray);
+    border-radius: 12px;
+    background: var(--background);
+    color: var(--foreground);
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    &::placeholder {
+      color: var(--text-muted);
+    }
+  }
+
+  &Button {
+    padding: 0.6rem;
+    background: var(--secondary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201, 168, 76, 0.3);
+    }
+  }
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  line-height: 1.4;
+
+  input[type="checkbox"] {
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+    accent-color: var(--primary);
+    cursor: pointer;
+  }
+}
+
+.link {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+
+  &:hover {
+    color: var(--secondary);
+  }
+}

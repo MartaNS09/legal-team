@@ -1,0 +1,219 @@
+.team {
+  padding: 4rem 0;
+  background: var(--background);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  position: relative;
+  height: 420px;
+  border-radius: 30px;
+  overflow: hidden;
+  padding: 30px 25px 30px 25px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0px 1px 4px 0px rgba(255, 255, 255, 0.04) inset;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  [data-theme="dark"] & {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  [data-theme="light"] & {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.06);
+  }
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -480px;
+    left: -10px;
+    width: 1480px;
+    height: 960px;
+    border-radius: 50%;
+    background-image: 
+      radial-gradient(circle at 0% 50%, var(--card-gradient-1), transparent),
+      radial-gradient(circle at 50% 100%, var(--card-gradient-2), transparent);
+    filter: blur(150px);
+    transition: all 0.5s ease;
+    z-index: 0;
+  }
+
+  &:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: var(--secondary);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+
+    &::before {
+      opacity: 0.8;
+    }
+  }
+}
+
+.cardGlow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.card:hover .cardGlow {
+  opacity: 0.06;
+}
+
+.imageWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+  opacity: 0.85;
+}
+
+.card:hover .photo {
+  transform: scale(1.05);
+}
+
+// ===== УВЕЛИЧЕННЫЕ ЗАГОЛОВКИ =====
+.name {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-serif);
+  font-size: 1.4rem;        /* ← УВЕЛИЧИЛИ */
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  margin-top: auto;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+  line-height: 1.2;
+}
+
+.vocation {
+  position: relative;
+  z-index: 2;
+  font-size: 0.8rem;        /* ← УВЕЛИЧИЛИ */
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 600;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.stats {
+  position: relative;
+  z-index: 2;
+  font-size: 0.8rem;        /* ← УВЕЛИЧИЛИ */
+  font-weight: 700;
+  color: var(--secondary);
+  margin-top: 0.3rem;
+  padding: 0.3rem 0.8rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+// Черная карточка "20+"
+.cardBlack {
+  background: linear-gradient(135deg, var(--primary) 0%, #0d1f3c 100%) !important;
+  border-color: var(--primary) !important;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    display: none;
+  }
+
+  &:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(26, 58, 107, 0.3);
+    border-color: var(--secondary) !important;
+  }
+}
+
+.cardBlackContent {
+  position: relative;
+  z-index: 1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.cardBlackNumber {
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--secondary);
+  text-shadow: 0 2px 30px rgba(201, 168, 76, 0.2);
+}
+
+.cardBlackText {
+  font-size: 1.1rem;       /* ← УВЕЛИЧИЛИ */
+  font-weight: 600;
+  text-align: center;
+}
+
+.cardBlackSubtext {
+  font-size: 0.75rem;      /* ← УВЕЛИЧИЛИ */
+  opacity: 0.7;
+  text-align: center;
+}
+
+.cardBlackEmoji {
+  font-size: 2rem;
+  margin-top: 0.3rem;
+  animation: pulseStar 2s ease-in-out infinite;
+}
+
+@keyframes pulseStar {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.2) rotate(10deg); }
+}
