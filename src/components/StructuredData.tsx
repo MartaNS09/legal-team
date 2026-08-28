@@ -12,7 +12,7 @@ export function StructuredData() {
     description:
       'Профессиональные юридические услуги в Москве: арбитраж, корпоративное право, налоги, семейное право. 15 лет опыта, 1000+ выигранных дел.',
     url: BASE_URL,
-    logo: `${BASE_URL}/favicon.ico`,
+    logo: `${BASE_URL}/icon-512.png`,
     image: `${BASE_URL}/og-image.jpg`,
     telephone: '+74994951890',
     email: 'info@legal-team.pro',

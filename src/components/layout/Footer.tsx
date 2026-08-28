@@ -113,6 +113,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="footer__developer-link"
             >
+              <span className="footer__developer-badge" aria-hidden="true">✦</span>
               APSOD
               <span className="visually-hidden"> (откроется в новой вкладке)</span>
             </a>
