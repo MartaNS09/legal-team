@@ -10,26 +10,36 @@ import { PrinciplesSection } from '@/components/sections/PrinciplesSection';
 import { WhyUsSection } from '@/components/sections/WhyUsSection';
 import { CtaSection } from '@/components/sections/CtaSection';
 import { aboutAdvantagesItems } from '@/data/whyUs';
+import { buildPageMetadata, SITE } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: 'О компании Legal Team | Профессиональные юристы и адвокаты в Москве',
   description:
     'Юридическая компания Legal Team — команда опытных адвокатов и юристов. 15 лет успешной работы, 1000+ выигранных дел. Доверьте защиту профессионалам.',
+  path: '/o-nas',
   keywords: 'юридическая компания, адвокаты, юристы, о компании, Legal Team',
-  openGraph: {
-    title: 'О компании Legal Team | Профессиональные юристы',
-    description: 'Команда опытных адвокатов. 15 лет работы, 1000+ выигранных дел.',
-    type: 'website',
-    url: 'https://legal-team.pro/o-nas',
-  },
-  alternates: {
-    canonical: 'https://legal-team.pro/o-nas',
-  },
-};
+});
 
 export default function AboutPage() {
+  const aboutSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': `${SITE.url}/o-nas#aboutpage`,
+    url: `${SITE.url}/o-nas`,
+    name: 'О компании Legal Team',
+    description:
+      'Юридическая компания Legal Team — 15 лет опыта, 1000+ выигранных дел, 22 направления права.',
+    inLanguage: 'ru-RU',
+    isPartOf: { '@id': `${SITE.url}/#website` },
+    mainEntity: { '@id': `${SITE.url}/#organization` },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}
+      />
       <Marquee
         text="Бесплатная консультация по любым юридическим вопросам • Работаем 24/7 • Звоните +7 (499) 495-18-90"
         speed={30}

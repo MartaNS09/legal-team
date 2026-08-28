@@ -11,27 +11,30 @@ import { ConsultationForm } from '@/components/ui/ConsultationForm';
 import { ServiceCardImage } from '@/components/ui/ServiceCardImage';
 import { AdBanner } from '@/components/ui/AdBanner';
 import { PageHero } from '@/components/ui/PageHero';
-import type { Metadata } from 'next';
+import { buildPageMetadata, SITE } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: 'Юридические услуги в Москве | Полный перечень',
   description:
-    'Полный спектр юридических услуг: арбитраж, семейное право, корпоративное право, налоги, недвижимость, банкротство. Бесплатная консультация юриста 24/7. 15 лет опыта, 98% успешных дел.',
+    'Полный спектр юридических услуг: арбитраж, семейное право, корпоративное право, налоги, недвижимость, банкротство. Бесплатная консультация 24/7. 15 лет опыта, 98% успешных дел.',
+  path: '/services',
   keywords:
     'юридические услуги, юрист, адвокат, арбитраж, семейное право, корпоративное право, налоговый юрист, банкротство, недвижимость, бесплатная консультация юриста',
-  alternates: {
-    canonical: 'https://legal-team.pro/services',
-  },
-  openGraph: {
-    title: 'Юридические услуги в Москве | Legal Team',
-    description:
-      'Полный спектр юридических услуг. Бесплатная консультация 24/7. 15 лет опыта.',
-    url: 'https://legal-team.pro/services',
-    type: 'website',
-  },
-};
+});
 
 export default function ServicesListPage() {
+  const servicesCollectionSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `${SITE.url}/services#collection`,
+    url: `${SITE.url}/services`,
+    name: 'Юридические услуги Legal Team',
+    description: 'Полный каталог юридических услуг: 21 направление права в Москве и России.',
+    inLanguage: 'ru-RU',
+    isPartOf: { '@id': `${SITE.url}/#website` },
+    about: { '@id': `${SITE.url}/#organization` },
+  };
+
   const faqItems = [
     {
       question: 'Какие юридические услуги вы предоставляете?',
@@ -82,6 +85,10 @@ export default function ServicesListPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesCollectionSchema) }}
+      />
       <Marquee 
         text="Бесплатная консультация по любым юридическим вопросам • Работаем 24/7 • Звоните +7 (499) 495-18-90 • 15 лет опыта • 98% успешных дел"
         speed={30}

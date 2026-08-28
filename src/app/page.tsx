@@ -20,20 +20,15 @@ import { ServiceCardImage } from "@/components/ui/ServiceCardImage";
 import Link from "next/link";
 import { services } from "@/data/services";
 import { homeFaqItems } from "@/data/homeFaq";
+import { buildPageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title:
-    "Юридическая компания Legal Team | Профессиональные юридические услуги в Москве",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Юридическая компания Legal Team | Профессиональные юридические услуги в Москве",
   description:
-    "Юридические услуги в Москве и России: арбитраж, налоги, семейное право, банкротство, недвижимость. 15 лет опыта, 1000+ дел, 98% успеха. Бесплатная консультация юриста 24/7. Отзывы клиентов, прозрачные цены.",
-  alternates: {
-    canonical: "https://legal-team.pro",
-  },
-  openGraph: {
-    url: "https://legal-team.pro",
-  },
-};
+    "Юридические услуги в Москве и России: арбитраж, налоги, семейное право, банкротство, недвижимость. 15 лет опыта, 1000+ дел, 98% успеха. Бесплатная консультация 24/7.",
+  path: "/",
+});
 
 export default function Home() {
   const servicesList = [

@@ -5,24 +5,34 @@ import { Marquee } from '@/components/ui/Marquee';
 import { Footer } from '@/components/layout/Footer';
 import { PageHero } from '@/components/ui/PageHero';
 import { ArticlesSection } from '@/components/sections/ArticlesSection';
+import { buildPageMetadata, SITE } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: 'Юридические статьи и инструкции | Legal Team',
   description:
     'Экспертные статьи юристов Legal Team: защита прав потребителей, налоги, развод, арбитраж, банкротство, недвижимость. Практические гиды 2026.',
-  alternates: {
-    canonical: 'https://legal-team.pro/articles',
-  },
-  openGraph: {
-    title: 'Юридические статьи | Legal Team',
-    url: 'https://legal-team.pro/articles',
-    type: 'website',
-  },
-};
+  path: '/articles',
+});
 
 export default function ArticlesPage() {
+  const collectionSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `${SITE.url}/articles#collection`,
+    url: `${SITE.url}/articles`,
+    name: 'Юридические статьи Legal Team',
+    description: 'Экспертные материалы юристов: инструкции, гиды и разборы актуального законодательства.',
+    inLanguage: 'ru-RU',
+    isPartOf: { '@id': `${SITE.url}/#website` },
+    about: { '@id': `${SITE.url}/#organization` },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+      />
       <Marquee
         text="Бесплатная консультация • Работаем 24/7 • +7 (499) 495-18-90"
         speed={30}

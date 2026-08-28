@@ -9,6 +9,7 @@ import { Footer } from '@/components/layout/Footer';
 import { ConsultationForm } from '@/components/ui/ConsultationForm';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { renderTextWithLinks } from '@/lib/renderTextWithLinks';
+import { buildPageMetadata, getArticleSchema } from '@/lib/seo';
 import type { Metadata } from 'next';
 
 export async function generateStaticParams() {
@@ -24,22 +25,17 @@ export async function generateMetadata({
   const article = getArticleBySlug(slug);
   if (!article) return { title: 'Статья не найдена' };
 
-  return {
+  return buildPageMetadata({
     title: article.metaTitle,
     description: article.metaDescription,
+    path: `/articles/${article.slug}`,
     keywords: article.keywords,
-    alternates: {
-      canonical: `https://legal-team.pro/articles/${article.slug}`,
-    },
-    openGraph: {
-      title: article.metaTitle,
-      description: article.metaDescription,
-      type: 'article',
-      url: `https://legal-team.pro/articles/${article.slug}`,
-      publishedTime: article.date,
-      images: [{ url: article.image, alt: article.imageAlt }],
-    },
-  };
+    type: 'article',
+    image: article.image,
+    imageAlt: article.imageAlt,
+    publishedTime: article.date,
+    section: article.category,
+  });
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -53,25 +49,14 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     .map((s) => getArticleBySlug(s))
     .filter(Boolean);
 
-  const articleSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: article.title,
-    description: article.metaDescription,
-    image: `https://legal-team.pro${article.image}`,
-    datePublished: article.date,
-    author: {
-      '@type': 'Organization',
-      name: 'Legal Team',
-      url: 'https://legal-team.pro',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Legal Team',
-      url: 'https://legal-team.pro',
-    },
-    mainEntityOfPage: `https://legal-team.pro/articles/${article.slug}`,
-  };
+  const articleSchema = getArticleSchema({
+    title: article.title,
+    metaDescription: article.metaDescription,
+    slug: article.slug,
+    date: article.date,
+    image: article.image,
+    category: article.category,
+  });
 
   return (
     <>

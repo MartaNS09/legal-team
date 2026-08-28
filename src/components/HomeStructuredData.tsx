@@ -2,13 +2,13 @@ import { homeFaqItems } from '@/data/homeFaq';
 import { reviews } from '@/data/reviews';
 import { caseStudies } from '@/data/caseStudies';
 import { articles } from '@/data/articles';
-
-const BASE_URL = 'https://legal-team.pro';
+import { absoluteUrl, SITE } from '@/lib/seo';
 
 export function HomeStructuredData() {
   const faqPage = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
+    '@id': `${SITE.url}/#faq`,
     mainEntity: homeFaqItems.map((item) => ({
       '@type': 'Question',
       name: item.question,
@@ -40,27 +40,9 @@ export function HomeStructuredData() {
         },
         reviewBody: review.text,
         datePublished: review.date,
-        itemReviewed: {
-          '@type': 'LegalService',
-          name: 'Legal Team',
-          url: BASE_URL,
-        },
+        itemReviewed: { '@id': `${SITE.url}/#organization` },
       },
     })),
-  };
-
-  const aggregateRating = {
-    '@context': 'https://schema.org',
-    '@type': 'LegalService',
-    '@id': `${BASE_URL}/#organization`,
-    name: 'Legal Team',
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: reviews.length,
-      bestRating: '5',
-      worstRating: '1',
-    },
   };
 
   const caseList = {
@@ -79,6 +61,7 @@ export function HomeStructuredData() {
           '@type': 'Person',
           name: item.lawyer,
         },
+        publisher: { '@id': `${SITE.url}/#organization` },
       },
     })),
   };
@@ -94,19 +77,32 @@ export function HomeStructuredData() {
         '@type': 'Article',
         headline: article.title,
         description: article.excerpt,
-        url: `${BASE_URL}/articles/${article.slug}`,
+        url: absoluteUrl(`/articles/${article.slug}`),
         datePublished: article.date,
-        image: `${BASE_URL}${article.image}`,
-        author: {
-          '@type': 'Organization',
-          name: 'Legal Team',
-        },
+        image: absoluteUrl(article.image),
+        author: { '@id': `${SITE.url}/#organization` },
       },
     })),
   };
 
+  const webPage = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${SITE.url}/#webpage`,
+    url: SITE.url,
+    name: 'Legal Team — юридическая компания в Москве',
+    description: SITE.description,
+    isPartOf: { '@id': `${SITE.url}/#website` },
+    about: { '@id': `${SITE.url}/#organization` },
+    inLanguage: 'ru-RU',
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPage) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPage) }}
@@ -118,10 +114,6 @@ export function HomeStructuredData() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(caseList) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRating) }}
       />
       <script
         type="application/ld+json"

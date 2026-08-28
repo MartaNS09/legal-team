@@ -5,22 +5,15 @@ import { ConsultationForm } from '@/components/ui/ConsultationForm';
 import { Footer } from '@/components/layout/Footer';
 import { PageHero } from '@/components/ui/PageHero';
 import Link from 'next/link';
+import { buildPageMetadata, SITE, getOrganizationSchema } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: 'Контакты Legal Team | Адрес, телефон, карта в Москве',
   description:
     'Свяжитесь с Legal Team: телефон +7 (499) 495-18-90, адрес в Москве — ул. Тверская, д. 15. Форма обратной связи. Работаем ежедневно.',
+  path: '/kontakty',
   keywords: 'контакты юриста, Legal Team телефон, юридическая компания Москва адрес',
-  alternates: {
-    canonical: 'https://legal-team.pro/kontakty',
-  },
-  openGraph: {
-    title: 'Контакты Legal Team',
-    description: 'Телефон +7 (499) 495-18-90, адрес в Москве. Работаем ежедневно.',
-    url: 'https://legal-team.pro/kontakty',
-    type: 'website',
-  },
-};
+});
 
 const STATS = [
   { value: '15 мин', label: 'Среднее время ответа' },
@@ -90,20 +83,13 @@ export default function ContactsPage() {
   const contactSchema = {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
+    '@id': `${SITE.url}/kontakty#contactpage`,
     name: 'Контакты Legal Team',
-    url: 'https://legal-team.pro/kontakty',
-    mainEntity: {
-      '@type': 'LegalService',
-      name: 'Legal Team',
-      telephone: '+74994951890',
-      email: 'info@legal-team.pro',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'ул. Тверская, д. 15, офис 7',
-        addressLocality: 'Москва',
-        addressCountry: 'RU',
-      },
-    },
+    url: `${SITE.url}/kontakty`,
+    description: 'Телефон, адрес офиса и форма обратной связи юридической компании Legal Team.',
+    inLanguage: 'ru-RU',
+    isPartOf: { '@id': `${SITE.url}/#website` },
+    mainEntity: { '@id': `${SITE.url}/#organization` },
   };
 
   return (

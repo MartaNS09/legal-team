@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/app/providers/ThemeProvider';
 import { StructuredData } from '@/components/StructuredData';
+import { SITE, buildOpenGraph, buildTwitter } from '@/lib/seo';
 import '@/styles/globals.scss';
 
 const inter = Inter({
@@ -22,13 +23,12 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://legal-team.pro'),
+  metadataBase: new URL(SITE.url),
   title: {
     default: 'Юридическая компания Legal Team | Профессиональные юридические услуги в Москве',
     template: '%s | Legal Team',
   },
-  description:
-    'Юридические услуги в Москве: арбитраж, корпоративное право, налоги, семейное право. 15 лет опыта, 1000+ выигранных дел. Бесплатная консультация юриста онлайн 24/7.',
+  description: SITE.description,
   keywords: [
     'юрист',
     'адвокат',
@@ -41,10 +41,10 @@ export const metadata: Metadata = {
     'бесплатная консультация юриста',
     'юрист Москва',
   ],
-  authors: [{ name: 'Legal Team', url: 'https://legal-team.pro' }],
-  creator: 'Legal Team',
-  publisher: 'Legal Team',
-  applicationName: 'Legal Team',
+  authors: [{ name: SITE.name, url: SITE.url }],
+  creator: SITE.name,
+  publisher: SITE.name,
+  applicationName: SITE.name,
   referrer: 'origin-when-cross-origin',
   formatDetection: {
     telephone: true,
@@ -62,34 +62,21 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  openGraph: {
-    title: 'Юридическая компания Legal Team | Профессиональные юридические услуги',
+  openGraph: buildOpenGraph({
+    title: `${SITE.legalName} | Профессиональные юридические услуги`,
+    description:
+      '15 лет опыта, 1000+ выигранных дел, рейтинг 4.9. Бесплатная консультация юриста 24/7.',
+    path: '/',
+  }),
+  twitter: buildTwitter({
+    title: SITE.legalName,
     description:
       '15 лет опыта, 1000+ выигранных дел. Бесплатная консультация юриста онлайн 24/7.',
-    url: 'https://legal-team.pro',
-    siteName: 'Legal Team',
-    locale: 'ru_RU',
-    type: 'website',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Legal Team — профессиональные юридические услуги в Москве',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Юридическая компания Legal Team',
-    description:
-      '15 лет опыта, 1000+ выигранных дел. Бесплатная консультация юриста онлайн 24/7.',
-    images: ['/og-image.jpg'],
-  },
+  }),
   alternates: {
-    canonical: 'https://legal-team.pro',
+    canonical: SITE.url,
     languages: {
-      'ru-RU': 'https://legal-team.pro',
+      'ru-RU': SITE.url,
     },
   },
   manifest: '/site.webmanifest',

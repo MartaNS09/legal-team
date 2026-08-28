@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getBreadcrumbSchema } from '@/lib/seo';
 
 export interface BreadcrumbItem {
   label: string;
@@ -9,23 +10,9 @@ interface BreadcrumbsProps {
   items: BreadcrumbItem[];
 }
 
-const BASE_URL = 'https://legal-team.pro';
-
 export function Breadcrumbs({ items }: BreadcrumbsProps) {
   const allItems: BreadcrumbItem[] = [{ label: 'Главная', href: '/' }, ...items];
-
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: allItems.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.label,
-      ...(item.href
-        ? { item: item.href.startsWith('http') ? item.href : `${BASE_URL}${item.href}` }
-        : {}),
-    })),
-  };
+  const schema = getBreadcrumbSchema(items);
 
   return (
     <nav className="breadcrumbs" aria-label="Хлебные крошки">

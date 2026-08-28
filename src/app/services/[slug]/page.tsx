@@ -8,6 +8,8 @@ import { Accordion } from '@/components/ui/Accordion';
 import { Footer } from '@/components/layout/Footer';
 import { AdBanner } from '@/components/ui/AdBanner';
 import { PageHero } from '@/components/ui/PageHero';
+import { getServiceCardImage } from '@/data/serviceImages';
+import { buildPageMetadata, getServiceSchema, SITE } from '@/lib/seo';
 import type { Metadata } from 'next';
 
 export async function generateStaticParams() {
@@ -26,20 +28,14 @@ export async function generateMetadata({
   if (!service) {
     return { title: 'Услуга не найдена' };
   }
-  return {
+  return buildPageMetadata({
     title: service.metaTitle,
     description: service.metaDescription,
+    path: `/services/${service.slug}`,
     keywords: service.keywords,
-    alternates: {
-      canonical: `https://legal-team.pro/services/${service.slug}`,
-    },
-    openGraph: {
-      title: service.metaTitle,
-      description: service.metaDescription,
-      type: 'website',
-      url: `https://legal-team.pro/services/${service.slug}`,
-    },
-  };
+    image: getServiceCardImage(service.slug),
+    imageAlt: `${service.shortTitle} — Legal Team`,
+  });
 }
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -54,23 +50,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     .map((relatedSlug) => services.find((s) => s.slug === relatedSlug))
     .filter(Boolean);
 
-  const serviceSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: service.title,
-    description: service.metaDescription,
-    provider: {
-      '@type': 'LegalService',
-      name: 'Legal Team',
-      url: 'https://legal-team.pro',
-      telephone: '+74994951890',
-    },
-    areaServed: {
-      '@type': 'City',
-      name: 'Москва',
-    },
-    url: `https://legal-team.pro/services/${service.slug}`,
-  };
+  const serviceSchema = getServiceSchema({
+    title: service.title,
+    metaDescription: service.metaDescription,
+    slug: service.slug,
+  });
 
   const faqSchema =
     service.faq && service.faq.length > 0
