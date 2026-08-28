@@ -88,11 +88,21 @@ body {
   line-height: 1.6;
   padding-top: var(--header-offset);
   overflow-x: hidden;
-  transition: padding-top 0.28s ease;
 
   @media (max-width: 768px) {
     --marquee-height: 30px;
     --header-height: 56px;
+    padding-top: calc(var(--header-offset) + env(safe-area-inset-top, 0px));
+  }
+}
+
+html.marquee-hidden {
+  @media (max-width: 768px) {
+    --marquee-height: 0px;
+
+    body {
+      padding-top: calc(var(--header-height) + env(safe-area-inset-top, 0px));
+    }
   }
 }
 
