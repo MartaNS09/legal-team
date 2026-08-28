@@ -8,20 +8,42 @@
   background: linear-gradient(90deg, var(--primary), var(--primary-light));
   color: white;
   padding: 0.4rem 0;
-  white-space: nowrap;
   font-weight: 500;
   font-size: 0.85rem;
-  z-index: 999;
+  z-index: 9999;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 
-  &__text {
-    display: inline-block;
-    padding: 0 2rem;
-    will-change: transform;
-    letter-spacing: 0.5px;
+  &__track {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll var(--marquee-duration, 35s) linear infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+      width: 100%;
+      justify-content: center;
+    }
   }
 
-  &__text:last-child {
-    padding-left: 2rem;
+  &__text {
+    flex-shrink: 0;
+    padding-inline: 2.5rem;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track .marquee__text:last-child {
+    display: none;
   }
 }

@@ -86,23 +86,13 @@ export const metadata: Metadata = {
       '15 лет опыта, 1000+ выигранных дел. Бесплатная консультация юриста онлайн 24/7.',
     images: ['/og-image.jpg'],
   },
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon-16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
-    ],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
-  },
-  manifest: '/site.webmanifest',
   alternates: {
     canonical: 'https://legal-team.pro',
     languages: {
       'ru-RU': 'https://legal-team.pro',
     },
   },
+  manifest: '/site.webmanifest',
   category: 'law',
   classification: 'Юридические услуги',
 };
