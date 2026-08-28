@@ -121,6 +121,12 @@ export default function ContactsPage() {
           }
         />
 
+        <div className="container">
+          <p className="contacts-page__demo-note" role="note">
+            {SITE.demoDisclaimer}
+          </p>
+        </div>
+
         <section className="contacts-page__stats" aria-label="Показатели работы">
           <div className="container">
             <div className="contacts-page__stats-grid">

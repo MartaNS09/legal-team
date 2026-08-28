@@ -26,6 +26,8 @@ export const SITE = {
   },
   geo: { latitude: 55.757, longitude: 37.615 },
   rating: { value: '4.9', count: reviews.length, best: '5', worst: '1' },
+  demoDisclaimer:
+    'Телефоны, адреса, email и реквизиты на сайте вымышлены и используются только для демонстрации.',
 };
 
 export function absoluteUrl(path: string): string {

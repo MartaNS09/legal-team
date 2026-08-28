@@ -1,6 +1,18 @@
 .contacts-page {
   padding-bottom: var(--section-padding);
 
+  &__demo-note {
+    margin: 1.25rem auto 0;
+    padding: 0.65rem 1rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    background: color-mix(in srgb, var(--secondary) 10%, var(--gray-light));
+    border: 1px solid color-mix(in srgb, var(--secondary) 28%, transparent);
+    border-radius: 10px;
+    max-width: 720px;
+  }
+
   &__stats {
     background: var(--gray-light);
     border-bottom: 1px solid var(--gray);

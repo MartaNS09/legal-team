@@ -8,7 +8,11 @@
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--gray);
-  transition: background 0.25s ease, backdrop-filter 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    top 0.28s ease,
+    background 0.25s ease,
+    backdrop-filter 0.25s ease,
+    box-shadow 0.25s ease;
 
   [data-theme="dark"] & {
     background: rgba(13, 17, 23, 0.92);

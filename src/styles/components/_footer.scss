@@ -92,16 +92,20 @@
 
   &__email {
     color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.2s;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
+    min-height: auto;
+    display: block;
+  }
 
-    &:hover,
-    &:focus-visible {
-      color: var(--primary);
-    }
+  &__demo-note {
+    margin: 0.5rem 0 0;
+    font-size: 0.72rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+    max-width: 320px;
+    padding: 0.45rem 0.65rem;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--secondary) 10%, var(--background));
+    border: 1px solid color-mix(in srgb, var(--secondary) 25%, transparent);
   }
 
   &__meta {

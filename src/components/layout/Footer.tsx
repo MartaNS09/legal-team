@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { InstallAppLink } from '@/components/pwa/InstallPrompt';
+import { SITE } from '@/lib/seo';
 
 export function Footer() {
   const [showTopBtn, setShowTopBtn] = useState(false);
@@ -34,12 +35,11 @@ export function Footer() {
             1000+ выигранных дел, 22 направления права.
           </p>
           <div className="footer__contacts">
-            <a href="tel:+74994951890" className="footer__phone" aria-label="Позвонить: +7 499 495-18-90">
-              +7 (499) 495-18-90
-            </a>
-            <a href="mailto:info@legal-team.pro" className="footer__email">
-              info@legal-team.pro
-            </a>
+            <span className="footer__phone" aria-label={`Демо-телефон: ${SITE.phoneDisplay}`}>
+              {SITE.phoneDisplay}
+            </span>
+            <span className="footer__email">{SITE.email}</span>
+            <p className="footer__demo-note">{SITE.demoDisclaimer}</p>
           </div>
           <div className="footer__meta">
             <p className="footer__meta-item">

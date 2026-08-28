@@ -308,14 +308,6 @@
       }
     }
 
-    &__content {
-      padding: 1rem 1.25rem;
-      border-radius: 16px;
-      background: color-mix(in srgb, var(--background) 82%, transparent);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px rgb(0 0 0 / 35%);
-    }
-
     &__buttons .button--outline {
       background: color-mix(in srgb, var(--background) 55%, var(--foreground) 12%);
       border-color: color-mix(in srgb, var(--foreground) 45%, transparent);
