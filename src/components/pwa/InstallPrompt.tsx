@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
+import { usePathname } from 'next/navigation';
 
 const DISMISS_KEY = 'legal-team-pwa-install-dismissed';
-const SHOW_DELAY_MS = 3500;
+const LEGACY_DISMISS_KEY = 'legal-team-pwa-install-dismissed';
+const SHOW_DELAY_MS = 2000;
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -21,6 +23,22 @@ function isStandaloneMode(): boolean {
 function isIosDevice(): boolean {
   if (typeof window === 'undefined') return false;
   return /iPad|iPhone|iPod/.test(navigator.userAgent) && !('MSStream' in window);
+}
+
+function isDismissedThisSession(): boolean {
+  try {
+    return sessionStorage.getItem(DISMISS_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function setDismissedThisSession(): void {
+  try {
+    sessionStorage.setItem(DISMISS_KEY, '1');
+  } catch {
+    // ignore
+  }
 }
 
 export function usePwaInstall() {
@@ -58,29 +76,31 @@ export function usePwaInstall() {
 }
 
 export function InstallPrompt() {
+  const pathname = usePathname();
   const { canInstall, isIos, isStandalone, install } = usePwaInstall();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    try {
+      localStorage.removeItem(LEGACY_DISMISS_KEY);
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  useEffect(() => {
     if (isStandalone) return;
-    if (localStorage.getItem(DISMISS_KEY)) return;
 
-    const handler = (e: Event) => {
-      e.preventDefault();
-      setVisible(true);
-    };
+    setVisible(false);
 
-    window.addEventListener('beforeinstallprompt', handler);
+    if (isDismissedThisSession()) return;
 
     const timer = window.setTimeout(() => {
       setVisible(true);
     }, SHOW_DELAY_MS);
 
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handler);
-      window.clearTimeout(timer);
-    };
-  }, [isStandalone]);
+    return () => window.clearTimeout(timer);
+  }, [isStandalone, pathname]);
 
   useEffect(() => {
     const open = () => {
@@ -91,7 +111,7 @@ export function InstallPrompt() {
   }, [isStandalone]);
 
   const dismiss = () => {
-    localStorage.setItem(DISMISS_KEY, '1');
+    setDismissedThisSession();
     setVisible(false);
   };
 
@@ -99,20 +119,22 @@ export function InstallPrompt() {
     if (canInstall) {
       const accepted = await install();
       if (accepted) dismiss();
-    } else if (isIos) {
-      dismiss();
+      return;
     }
+    dismiss();
   };
 
   const getDescription = () => {
     if (isIos) {
-      return 'Нажмите «Поделиться» → «На экран Домой» — приложение появится на главном экране.';
+      return 'Нажмите «Поделиться» ⎙ внизу Safari → «На экран Домой» — приложение появится на главном экране iPhone.';
     }
     if (canInstall) {
       return 'Добавьте Legal Team на главный экран — чат с юристом и консультации всегда под рукой.';
     }
-    return 'В Chrome: меню ⋮ → «Установить Legal Team» или «Установить приложение». В Safari на Mac: «Файл» → «Добавить в Dock».';
+    return 'Chrome / Edge: меню ⋮ → «Установить приложение». Safari на Mac: «Файл» → «Добавить в Dock».';
   };
+
+  const primaryLabel = canInstall ? 'Установить' : isIos ? 'Понятно' : 'Как установить';
 
   if (!visible || isStandalone) return null;
 
@@ -132,15 +154,13 @@ export function InstallPrompt() {
         </div>
       </div>
       <div className="pwa-install__actions">
-        {(canInstall || isIos) && (
-          <button
-            type="button"
-            className="pwa-install__btn pwa-install__btn--primary"
-            onClick={handleInstall}
-          >
-            {canInstall ? 'Установить' : 'Понятно'}
-          </button>
-        )}
+        <button
+          type="button"
+          className="pwa-install__btn pwa-install__btn--primary"
+          onClick={handleInstall}
+        >
+          {primaryLabel}
+        </button>
         <button type="button" className="pwa-install__btn" onClick={dismiss}>
           Не сейчас
         </button>
@@ -155,7 +175,11 @@ export function InstallAppLink({ className = '' }: { className?: string }) {
   if (isStandalone) return null;
 
   const showPrompt = () => {
-    localStorage.removeItem(DISMISS_KEY);
+    try {
+      sessionStorage.removeItem(DISMISS_KEY);
+    } catch {
+      // ignore
+    }
     window.dispatchEvent(new CustomEvent('legal-team:show-install'));
   };
 

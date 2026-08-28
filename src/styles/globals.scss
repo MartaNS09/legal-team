@@ -78,7 +78,6 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-size-adjust: 100%;
-  overflow-x: clip;
   max-width: 100%;
 }
 
@@ -89,23 +88,28 @@ body {
   transition: background-color var(--transition), color var(--transition);
   line-height: 1.6;
   padding-top: var(--header-offset);
-  overflow-x: clip;
+  overflow-x: hidden;
   max-width: 100%;
   width: 100%;
+  position: relative;
 
   @media (max-width: 768px) {
     --marquee-height: 30px;
     --header-height: 56px;
-    padding-top: calc(var(--header-offset) + env(safe-area-inset-top, 0px));
+    --site-top-offset: calc(
+      env(safe-area-inset-top, 0px) + var(--marquee-height) + var(--header-height)
+    );
+    padding-top: var(--site-top-offset);
   }
 }
 
 html.marquee-hidden {
   @media (max-width: 768px) {
     --marquee-height: 0px;
+    --site-top-offset: calc(env(safe-area-inset-top, 0px) + var(--header-height));
 
     body {
-      padding-top: calc(var(--header-height) + env(safe-area-inset-top, 0px));
+      padding-top: var(--site-top-offset);
     }
   }
 }
@@ -170,7 +174,7 @@ summary:focus-visible {
 }
 
 #main {
-  overflow-x: clip;
+  overflow-x: hidden;
   max-width: 100%;
 }
 

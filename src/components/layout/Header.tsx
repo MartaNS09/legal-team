@@ -41,11 +41,16 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 16);
+      const y = window.scrollY ?? document.documentElement.scrollTop ?? 0;
+      setIsScrolled(y > 16);
     };
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    document.addEventListener('scroll', handleScroll, { passive: true, capture: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('scroll', handleScroll, { capture: true });
+    };
   }, []);
 
   const handleMouseEnter = () => {
@@ -196,7 +201,7 @@ export function Header() {
     : null;
 
   return (
-    <header className={`header ${isMobileOpen ? 'header--menu-open' : ''} ${isScrolled ? 'header--scrolled' : ''}`} role="banner">
+    <header className={`header ${isMobileOpen ? 'header--menu-open' : ''} ${isScrolled ? 'header--scrolled header--pinned' : ''}`} role="banner">
       <div className="container header__inner">
         <Link href="/" className="header__logo">
           <span aria-hidden="true">⚖️</span>
