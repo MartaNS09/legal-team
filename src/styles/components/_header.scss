@@ -22,36 +22,43 @@
   }
 
   @media (max-width: 768px) {
-    top: 0;
+    top: calc(env(safe-area-inset-top, 0px) + var(--marquee-height, 30px));
     left: 0;
     right: 0;
     z-index: 10001;
-    padding-top: calc(env(safe-area-inset-top, 0px) + var(--marquee-height, 30px));
-    background: rgba(255, 255, 255, 0.98);
+    padding-top: 0;
+    background: var(--background);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-  }
 
-  html.marquee-hidden & {
-    @media (max-width: 768px) {
-      padding-top: env(safe-area-inset-top, 0px);
-      box-shadow: 0 2px 14px rgb(0 0 0 / 12%);
+    &::before {
+      content: '';
+      position: absolute;
+      top: calc(-1 * env(safe-area-inset-top, 0px));
+      left: 0;
+      right: 0;
+      height: env(safe-area-inset-top, 0px);
+      background: inherit;
+      pointer-events: none;
+    }
+
+    html:not(.at-top) & {
+      top: env(safe-area-inset-top, 0px);
+    }
+
+    html.chrome-hidden & {
+      transform: translate3d(0, calc(-100% - env(safe-area-inset-top, 0px)), 0);
+      pointer-events: none;
+    }
+
+    html.menu-open & {
+      transform: none;
+      pointer-events: auto;
     }
   }
 
-  &--pinned {
-    @media (max-width: 768px) {
-      padding-top: env(safe-area-inset-top, 0px);
-      background: rgba(255, 255, 255, 1) !important;
-      box-shadow: 0 2px 14px rgb(0 0 0 / 12%);
-
-      [data-theme='dark'] & {
-        background: rgba(13, 17, 23, 1) !important;
-      }
-    }
-  }
-
-  [data-theme="dark"] & {
+  [data-theme='dark'] & {
     background: rgba(13, 17, 23, 0.92);
   }
 

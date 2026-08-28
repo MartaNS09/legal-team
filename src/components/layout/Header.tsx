@@ -40,6 +40,11 @@ export function Header() {
   }, []);
 
   useEffect(() => {
+    document.documentElement.classList.toggle('menu-open', isMobileOpen);
+    return () => document.documentElement.classList.remove('menu-open');
+  }, [isMobileOpen]);
+
+  useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY ?? document.documentElement.scrollTop ?? 0;
       setIsScrolled(y > 16);
@@ -201,7 +206,7 @@ export function Header() {
     : null;
 
   return (
-    <header className={`header ${isMobileOpen ? 'header--menu-open' : ''} ${isScrolled ? 'header--scrolled header--pinned' : ''}`} role="banner">
+    <header className={`header ${isMobileOpen ? 'header--menu-open' : ''} ${isScrolled ? 'header--scrolled' : ''}`} role="banner">
       <div className="container header__inner">
         <Link href="/" className="header__logo">
           <span aria-hidden="true">⚖️</span>
