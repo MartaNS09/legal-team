@@ -76,13 +76,14 @@
     @media (max-width: 768px) {
       display: flex;
       overflow-x: auto;
+      overscroll-behavior-x: contain;
+      max-width: 100%;
+      min-width: 0;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       gap: 1rem;
       padding-bottom: 0.5rem;
-      margin-left: -0.25rem;
-      margin-right: -0.25rem;
       scrollbar-width: none;
 
       &::-webkit-scrollbar {

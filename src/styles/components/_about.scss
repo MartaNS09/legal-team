@@ -157,6 +157,9 @@
     @media (max-width: 768px) {
       display: flex;
       overflow-x: auto;
+      overscroll-behavior-x: contain;
+      max-width: 100%;
+      min-width: 0;
       scroll-snap-type: x mandatory;
       gap: 1rem;
       padding-bottom: 0.5rem;
@@ -169,6 +172,7 @@
       > * {
         flex: 0 0 85%;
         scroll-snap-align: start;
+        min-width: 0;
       }
     }
   }

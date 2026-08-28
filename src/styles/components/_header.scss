@@ -380,6 +380,10 @@
       visibility: visible;
       pointer-events: auto;
     }
+
+    &:not(.header__mobile--open) {
+      clip-path: inset(0 0 0 100%);
+    }
   }
 
   &__mobile-head {

@@ -78,6 +78,8 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-size-adjust: 100%;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 body {
@@ -87,7 +89,9 @@ body {
   transition: background-color var(--transition), color var(--transition);
   line-height: 1.6;
   padding-top: var(--header-offset);
-  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
+  width: 100%;
 
   @media (max-width: 768px) {
     --marquee-height: 30px;
@@ -162,6 +166,12 @@ summary:focus-visible {
   margin: 0 auto;
   padding: 0 clamp(1rem, 4vw, 4rem);
   width: 100%;
+  min-width: 0;
+}
+
+#main {
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 .section-title {
