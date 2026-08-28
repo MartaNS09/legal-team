@@ -103,9 +103,9 @@ export function TeamSection() {
 
   return (
     <section 
+      id="team"
       className={styles.team} 
       aria-labelledby="team-title"
-      role="region"
     >
       <div className="container">
         <h2 id="team-title" className="section-title">Наши направления</h2>
@@ -136,6 +136,7 @@ export function TeamSection() {
                   fill
                   className={styles.photo}
                   loading="lazy"
+                  quality={90}
                   sizes="(max-width: 576px) 100vw, (max-width: 992px) 50vw, 33vw"
                 />
               </div>

@@ -1,63 +1,106 @@
-'use client';
+import { services } from '@/data/services';
 
-import Script from 'next/script';
+const BASE_URL = 'https://legal-team.pro';
 
 export function StructuredData() {
-  const structuredData = {
+  const organization = {
     '@context': 'https://schema.org',
     '@type': 'LegalService',
+    '@id': `${BASE_URL}/#organization`,
     name: 'Legal Team',
-    description: 'Профессиональные юридические услуги. Арбитраж, корпоративное право, налоги, семейное право.',
-    url: 'https://legal-team.pro',
+    alternateName: 'Юридическая компания Legal Team',
+    description:
+      'Профессиональные юридические услуги в Москве: арбитраж, корпоративное право, налоги, семейное право. 15 лет опыта, 1000+ выигранных дел.',
+    url: BASE_URL,
+    logo: `${BASE_URL}/favicon.ico`,
+    image: `${BASE_URL}/og-image.jpg`,
     telephone: '+74994951890',
     email: 'info@legal-team.pro',
+    priceRange: '₽₽',
+    currenciesAccepted: 'RUB',
+    paymentAccepted: 'Cash, Credit Card, Bank Transfer',
+    areaServed: {
+      '@type': 'City',
+      name: 'Москва',
+    },
     address: {
       '@type': 'PostalAddress',
+      streetAddress: 'ул. Тверская, д. 15, офис 7',
       addressLocality: 'Москва',
+      postalCode: '125009',
       addressCountry: 'RU',
     },
-    openingHours: 'Mo-Su 00:00-24:00',
-    priceRange: '₽₽',
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '127',
-      bestRating: '5',
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 55.757,
+      longitude: 37.615,
     },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '09:00',
+        closes: '21:00',
+      },
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Saturday', 'Sunday'],
+        opens: '10:00',
+        closes: '19:00',
+      },
+    ],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+74994951890',
+      contactType: 'customer service',
+      availableLanguage: ['Russian'],
+      areaServed: 'RU',
+    },
+    sameAs: [],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Юридические услуги',
-      itemListElement: [
-        {
-          '@type': 'Offer',
-          name: 'Арбитражные споры',
-          description: 'Представление интересов в арбитражных судах всех инстанций.',
+      itemListElement: services.slice(0, 12).map((service, index) => ({
+        '@type': 'Offer',
+        position: index + 1,
+        itemOffered: {
+          '@type': 'Service',
+          name: service.title,
+          description: service.description,
+          url: `${BASE_URL}/services/${service.slug}`,
         },
-        {
-          '@type': 'Offer',
-          name: 'Корпоративное право',
-          description: 'Сопровождение сделок M&A, регистрация ООО, защита активов.',
-        },
-        {
-          '@type': 'Offer',
-          name: 'Налоговое право',
-          description: 'Налоговые проверки, оспаривание решений ФНС, оптимизация.',
-        },
-        {
-          '@type': 'Offer',
-          name: 'Семейное право',
-          description: 'Разводы, раздел имущества, алименты, споры о детях.',
-        },
-      ],
+      })),
     },
   };
 
+  const website = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${BASE_URL}/#website`,
+    url: BASE_URL,
+    name: 'Legal Team',
+    description: 'Юридические услуги в Москве — бесплатная консультация 24/7',
+    publisher: { '@id': `${BASE_URL}/#organization` },
+    inLanguage: 'ru-RU',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${BASE_URL}/services?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
+  const graph = {
+    '@context': 'https://schema.org',
+    '@graph': [organization, website],
+  };
+
   return (
-    <Script
-      id="structured-data"
+    <script
       type="application/ld+json"
-      strategy="afterInteractive"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
     />
   );
 }

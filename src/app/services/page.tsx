@@ -5,13 +5,30 @@ import { Marquee } from '@/components/ui/Marquee';
 import { Footer } from '@/components/layout/Footer';
 import { AnimatedCard } from '@/components/ui/AnimatedCard';
 import { Accordion } from '@/components/ui/Accordion';
+import { WhyUsSection } from '@/components/sections/WhyUsSection';
+import { CtaSection } from '@/components/sections/CtaSection';
+import { ConsultationForm } from '@/components/ui/ConsultationForm';
+import { ServiceCardImage } from '@/components/ui/ServiceCardImage';
 import { AdBanner } from '@/components/ui/AdBanner';
+import { PageHero } from '@/components/ui/PageHero';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Юридические услуги в Москве | Полный перечень | Legal Team',
-  description: 'Полный спектр юридических услуг: арбитраж, семейное право, корпоративное право, налоги, недвижимость, банкротство. Бесплатная консультация юриста 24/7. 15 лет опыта, 98% успешных дел.',
-  keywords: 'юридические услуги, юрист, адвокат, арбитраж, семейное право, корпоративное право, налоговый юрист, банкротство, недвижимость, бесплатная консультация юриста',
+  title: 'Юридические услуги в Москве | Полный перечень',
+  description:
+    'Полный спектр юридических услуг: арбитраж, семейное право, корпоративное право, налоги, недвижимость, банкротство. Бесплатная консультация юриста 24/7. 15 лет опыта, 98% успешных дел.',
+  keywords:
+    'юридические услуги, юрист, адвокат, арбитраж, семейное право, корпоративное право, налоговый юрист, банкротство, недвижимость, бесплатная консультация юриста',
+  alternates: {
+    canonical: 'https://legal-team.pro/services',
+  },
+  openGraph: {
+    title: 'Юридические услуги в Москве | Legal Team',
+    description:
+      'Полный спектр юридических услуг. Бесплатная консультация 24/7. 15 лет опыта.',
+    url: 'https://legal-team.pro/services',
+    type: 'website',
+  },
 };
 
 export default function ServicesListPage() {
@@ -42,13 +59,6 @@ export default function ServicesListPage() {
     },
   ];
 
-  const advantages = [
-    { icon: '⚖️', title: '15 лет опыта', desc: 'Более 15 лет успешной практики в различных отраслях права.' },
-    { icon: '🎯', title: '98% успешных дел', desc: 'Высокий процент выигранных дел и положительных решений.' },
-    { icon: '👨‍⚖️', title: '22 направления', desc: 'Широкий спектр юридических услуг для бизнеса и частных лиц.' },
-    { icon: '🕐', title: 'Работаем 24/7', desc: 'Круглосуточная поддержка и оперативное решение ваших вопросов.' },
-  ];
-
   const reviews = [
     {
       name: 'Александр Петров',
@@ -71,40 +81,40 @@ export default function ServicesListPage() {
   ];
 
   return (
-    <main id="main" role="main">
+    <>
       <Marquee 
-        text="⚡ Бесплатная консультация по любым юридическим вопросам • Работаем 24/7 • Звоните +7 (499) 495-18-90 • Задайте вопрос прямо сейчас • 15 лет опыта • 98% успешных дел • Юристы онлайн 24/7"
+        text="Бесплатная консультация по любым юридическим вопросам • Работаем 24/7 • Звоните +7 (499) 495-18-90 • 15 лет опыта • 98% успешных дел"
         speed={30}
       />
       <Header />
 
-      <section className="services-hero" aria-labelledby="services-hero-title">
-        <div className="services-hero__decor services-hero__decor--1" aria-hidden="true">⚖️</div>
-        <div className="services-hero__decor services-hero__decor--2" aria-hidden="true">📜</div>
-
-        <div className="container">
-          <div className="services-hero__content">
-            <div className="services-hero__badge">🌟 15 лет на рынке юридических услуг</div>
-            <h1 id="services-hero-title" className="services-hero__title">
-              Юридические услуги в Москве
-            </h1>
-            <p className="services-hero__subtitle">
-              Профессиональная юридическая помощь по всем направлениям права. 
-              Более 15 лет опыта, 1000+ выигранных дел. Бесплатная консультация 24/7.
-            </p>
-            <div className="services-hero__actions">
-              <a href="#consult" className="services-hero__button services-hero__button--primary">
+      <main id="main">
+        <PageHero
+          id="services-hero-title"
+          title="Юридические услуги в Москве"
+          subtitle="Профессиональная юридическая помощь по всем направлениям права. Более 15 лет опыта, 1000+ выигранных дел. Бесплатная консультация 24/7."
+          imageSrc="/images/hero/services.jpg"
+          imageAlt="Юридические услуги Legal Team"
+          badge="15 лет на рынке юридических услуг"
+          actions={
+            <>
+              <a href="#consult" className="page-hero__btn page-hero__btn--primary">
                 <span aria-hidden="true">📞</span> Бесплатная консультация
               </a>
-              <a href="tel:+74994951890" className="services-hero__button services-hero__button--outline">
+              <a href="tel:+74994951890" className="page-hero__btn page-hero__btn--outline">
                 +7 (499) 495-18-90
               </a>
-            </div>
-          </div>
-        </div>
-      </section>
+            </>
+          }
+        />
 
-      <div className="container" style={{ marginTop: '1.5rem' }}>
+        <section id="consult" className="services-consult">
+          <div className="container">
+            <ConsultationForm />
+          </div>
+        </section>
+
+      <div className="container ad-slot">
         <AdBanner 
           title="Здесь может быть ваша реклама!"
           subtitle="Разместите информацию о своей компании и привлекайте клиентов"
@@ -157,22 +167,7 @@ export default function ServicesListPage() {
         </div>
       </section>
 
-      <section style={{ padding: '3rem 0', background: 'var(--gray-light)' }}>
-        <div className="container">
-          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', textAlign: 'center', marginBottom: '2rem', color: 'var(--foreground)' }}>
-            Почему выбирают Legal Team
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
-            {advantages.map((adv) => (
-              <div key={adv.title} className="advantage-card">
-                <span className="advantage-card__icon">{adv.icon}</span>
-                <h3 className="advantage-card__title">{adv.title}</h3>
-                <p className="advantage-card__desc">{adv.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <WhyUsSection />
 
       <div className="container">
         <AdBanner 
@@ -183,27 +178,28 @@ export default function ServicesListPage() {
         />
       </div>
 
-      <section style={{ padding: '3rem 0' }}>
+      <section className="section-block">
         <div className="container">
-          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', textAlign: 'center', marginBottom: '0.5rem', color: 'var(--foreground)' }}>
-            Наши услуги
-          </h2>
-          <p style={{ textAlign: 'center', color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto 2rem', fontSize: '1.05rem' }}>
+          <h2 className="section-block__title">Наши услуги</h2>
+          <p className="section-block__subtitle">
             Выберите нужное направление и получите бесплатную консультацию юриста
           </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
+          <div className="services-grid">
             {services.map((service, index) => (
               <AnimatedCard key={service.id} delay={index * 80} direction={index % 2 === 0 ? 'left' : 'right'}>
                 <Link href={`/services/${service.slug}`} className="service-card-link">
-                  <div className="service-card-link__header">
-                    <span className="service-card-link__icon">{service.icon}</span>
-                    <h3 className="service-card-link__title">{service.shortTitle}</h3>
-                  </div>
-                  <p className="service-card-link__desc">{service.subtitle}</p>
-                  <div className="service-card-link__footer">
-                    <span className="service-card-link__link">Подробнее →</span>
-                    <span className="service-card-link__stats">{service.stats}</span>
+                  <ServiceCardImage slug={service.slug} title={service.shortTitle} />
+                  <div className="service-card-link__body">
+                    <div className="service-card-link__header">
+                      <span className="service-card-link__icon">{service.icon}</span>
+                      <h3 className="service-card-link__title">{service.shortTitle}</h3>
+                    </div>
+                    <p className="service-card-link__desc">{service.subtitle}</p>
+                    <div className="service-card-link__footer">
+                      <span className="service-card-link__link">Подробнее →</span>
+                      <span className="service-card-link__stats">{service.stats}</span>
+                    </div>
                   </div>
                 </Link>
               </AnimatedCard>
@@ -212,12 +208,10 @@ export default function ServicesListPage() {
         </div>
       </section>
 
-      <section style={{ padding: '3rem 0', background: 'var(--gray-light)' }}>
+      <section className="section-block section-block--muted" aria-labelledby="reviews-title">
         <div className="container">
-          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', textAlign: 'center', marginBottom: '2rem', color: 'var(--foreground)' }}>
-            Отзывы наших клиентов
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+          <h2 id="reviews-title" className="section-block__title">Отзывы наших клиентов</h2>
+          <div className="reviews-grid">
             {reviews.map((review, index) => (
               <div key={index} className="review-card">
                 <div className="review-card__stars">
@@ -245,36 +239,21 @@ export default function ServicesListPage() {
         />
       </div>
 
-      <section style={{ padding: '3rem 0' }}>
+      <section className="service-faq" aria-labelledby="services-faq-title">
         <div className="container">
-          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', textAlign: 'center', marginBottom: '2rem', color: 'var(--foreground)' }}>
+          <h2 id="services-faq-title" className="section-title">
             Часто задаваемые вопросы
           </h2>
-          <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <div className="service-faq__inner">
             <Accordion items={faqItems} defaultOpen={0} />
           </div>
         </div>
       </section>
 
-      <section className="cta-section">
-        <div className="cta-section__decor" aria-hidden="true">⚖️</div>
-        <div className="container">
-          <div className="cta-section__content">
-            <h2 className="cta-section__title">Нужна помощь юриста?</h2>
-            <p className="cta-section__text">
-              Получите бесплатную консультацию прямо сейчас. Наши юристы готовы ответить на все ваши вопросы.
-            </p>
-            <div>
-              <a href="/kontakty" className="cta-section__button">Получить консультацию</a>
-              <a href="tel:+74994951890" className="cta-section__button cta-section__button--outline">
-                +7 (499) 495-18-90
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CtaSection />
+      </main>
 
       <Footer />
-    </main>
+    </>
   );
 }

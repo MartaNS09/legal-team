@@ -1,0 +1,29 @@
+.service-card-image {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--gray);
+
+  &__img {
+    object-fit: cover;
+    filter: saturate(1.1) contrast(1.04);
+    transition: transform 0.4s ease, filter 0.4s ease;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 35%,
+      rgba(0, 0, 0, 0.25) 100%
+    );
+    pointer-events: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card-image__img {
+    transition: none;
+  }
+}

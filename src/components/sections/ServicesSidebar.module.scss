@@ -2,6 +2,11 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  // На мобилке услуги — в бургер-меню и блоке «Наши услуги»
+  @media (max-width: 992px) {
+    display: none;
+  }
 }
 
 .menu {
@@ -15,8 +20,8 @@
 
   &Title {
     padding: 1rem 1.5rem;
-    background: var(--primary);
-    color: white;
+    background: var(--table-header-bg);
+    color: var(--btn-primary-fg);
     font-weight: 700;
     font-size: 1.1rem;
     font-family: var(--font-serif);
@@ -32,17 +37,21 @@
 }
 
 .menuLink {
-  display: block;
-  padding: 0.6rem 1.5rem;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
   color: var(--foreground);
   text-decoration: none;
   transition: all 0.2s;
   font-size: 0.9rem;
+  min-height: 44px;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     background: var(--primary);
     color: white;
     padding-left: 2rem;
+    outline: none;
   }
 }
 
@@ -99,8 +108,8 @@
 
   &Button {
     padding: 0.6rem;
-    background: var(--secondary);
-    color: white;
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-fg);
     border: none;
     border-radius: 12px;
     font-size: 0.95rem;
@@ -133,9 +142,14 @@
 }
 
 .link {
-  color: var(--primary);
+  color: #0d1f3c;
+  font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 2px;
+
+  [data-theme='dark'] & {
+    color: #7cb8e8;
+  }
 
   &:hover {
     color: var(--secondary);

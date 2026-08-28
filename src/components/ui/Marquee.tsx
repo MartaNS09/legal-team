@@ -18,6 +18,12 @@ export function Marquee({ text, speed = 30, className = '' }: MarqueeProps) {
     const textEl = textRef.current;
     if (!container || !textEl) return;
 
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mediaQuery.matches) {
+      textEl.style.transform = 'none';
+      return;
+    }
+
     let animationId: number;
     let position = container.offsetWidth;
 
@@ -31,20 +37,28 @@ export function Marquee({ text, speed = 30, className = '' }: MarqueeProps) {
     };
 
     const clone = textEl.cloneNode(true) as HTMLDivElement;
+    clone.setAttribute('aria-hidden', 'true');
     container.appendChild(clone);
 
     animate();
 
     return () => {
       cancelAnimationFrame(animationId);
+      if (clone.parentNode) clone.parentNode.removeChild(clone);
     };
-  }, [text]);
+  }, [text, speed]);
 
   return (
-    <div className={`${styles.marquee} ${className}`} ref={containerRef}>
-      <div className={styles.marquee__text} ref={textRef}>
+    <div
+      className={`${styles.marquee} ${className}`}
+      ref={containerRef}
+      role="marquee"
+      aria-label={text}
+    >
+      <div className={styles.marquee__text} ref={textRef} aria-hidden="true">
         {text}
       </div>
+      <p className="visually-hidden">{text}</p>
     </div>
   );
 }

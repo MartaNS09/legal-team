@@ -1,0 +1,135 @@
+.page-hero {
+  position: relative;
+  padding: 8rem 0 3rem;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 6.5rem 0 2rem;
+    min-height: auto;
+  }
+
+  &--compact {
+    min-height: 42vh;
+    padding: 7rem 0 2.5rem;
+  }
+
+  &__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  &__image {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(13, 31, 60, 0.88) 0%,
+      rgba(26, 58, 107, 0.72) 45%,
+      rgba(13, 31, 60, 0.85) 100%
+    );
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 2;
+    max-width: 760px;
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 1rem;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  &__title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 3.6rem);
+    color: white;
+    margin-bottom: 0.75rem;
+    line-height: 1.1;
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  &__subtitle {
+    font-size: clamp(1rem, 2.2vw, 1.15rem);
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.65;
+    max-width: 560px;
+    text-shadow: 0 1px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  &__actions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+
+      .button,
+      .page-hero__btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    min-height: 48px;
+
+    &--primary {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+    }
+
+    &--outline {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+
+      &:hover {
+        border-color: white;
+        background: rgba(255, 255, 255, 0.08);
+      }
+    }
+  }
+}
+
+.ad-slot {
+  margin-top: 2.5rem;
+  margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    margin-top: 1.5rem;
+  }
+}

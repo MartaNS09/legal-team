@@ -9,19 +9,32 @@ export function ThemeToggle() {
 
   useEffect(() => setMounted(true), []);
 
-  if (!mounted) return null;
+  if (!mounted) {
+    return (
+      <button
+        type="button"
+        className="theme-toggle"
+        aria-hidden="true"
+        tabIndex={-1}
+        disabled
+      >
+        <span aria-hidden="true">🌙</span>
+      </button>
+    );
+  }
 
   const isDark = theme === 'dark';
 
   return (
     <button
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      aria-label={isDark ? 'Включить светлую тему' : 'Включить темную тему'}
+      aria-label={isDark ? 'Включить светлую тему' : 'Включить тёмную тему'}
+      aria-pressed={isDark}
       className="theme-toggle"
       type="button"
       title={isDark ? 'Светлая тема' : 'Тёмная тема'}
     >
-      {isDark ? '☀️' : '🌙'}
+      <span aria-hidden="true">{isDark ? '☀️' : '🌙'}</span>
     </button>
   );
 }

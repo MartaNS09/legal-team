@@ -55,13 +55,16 @@ function AccordionItem({ item, isOpen, onClick, index }: AccordionItemProps) {
   return (
     <div className={`${styles.item} ${isOpen ? styles.open : ''}`}>
       <button
+        type="button"
         className={styles.header}
         onClick={onClick}
         aria-expanded={isOpen}
         aria-controls={`accordion-content-${index}`}
         id={`accordion-header-${index}`}
       >
-        <span className={styles.icon}>{isOpen ? '−' : '+'}</span>
+        <span className={styles.icon} aria-hidden="true">
+          {isOpen ? '−' : '+'}
+        </span>
         <span className={styles.question}>{item.question}</span>
       </button>
       <div

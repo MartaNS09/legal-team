@@ -17,6 +17,34 @@
     background: rgba(26, 35, 46, 0.95);
     border-color: rgba(255, 255, 255, 0.1);
   }
+
+  @media (max-width: 480px) {
+    padding: 1.25rem 1rem;
+    border-radius: 16px;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.errorMessage {
+  margin: 0;
+  padding: 0.65rem 0.8rem;
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 .header {
@@ -49,6 +77,11 @@
   padding: 0.8rem 0;
   border-top: 1px solid var(--gray);
   border-bottom: 1px solid var(--gray);
+
+  @media (max-width: 380px) {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 }
 
 .stat {
@@ -227,8 +260,8 @@
 .submitButton {
   width: 100%;
   padding: 0.8rem;
-  background: var(--primary);
-  color: white;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
   border: none;
   border-radius: 12px;
   font-size: 1rem;

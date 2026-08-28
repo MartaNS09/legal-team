@@ -22,9 +22,11 @@ export function ServicesSidebar() {
 
   return (
     <aside className={styles.sidebar} aria-label="Боковое меню услуг">
-      <nav className={styles.menu} aria-label="Навигация по услугам">
+      <nav className={styles.menu} aria-labelledby="sidebar-services-title">
         <ul className={styles.menuList}>
-          <li className={styles.menuTitle} aria-hidden="true">Наши услуги</li>
+          <li className={styles.menuTitle}>
+            <span id="sidebar-services-title">Наши услуги</span>
+          </li>
           {services.map((service) => (
             <li key={service.id} className={styles.menuItem}>
               <Link 
