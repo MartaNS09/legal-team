@@ -118,11 +118,13 @@ export function InstallPrompt() {
 
   return (
     <div className="pwa-install" role="dialog" aria-labelledby="pwa-install-title">
+      <div className="pwa-install__glow" aria-hidden="true" />
       <div className="pwa-install__content">
-        <span className="pwa-install__icon" aria-hidden="true">
+        <div className="pwa-install__icon-wrap" aria-hidden="true">
           ⚖️
-        </span>
+        </div>
         <div className="pwa-install__text">
+          <span className="pwa-install__badge">Приложение</span>
           <p id="pwa-install-title" className="pwa-install__title">
             Установить Legal Team
           </p>

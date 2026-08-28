@@ -147,10 +147,44 @@
     gap: 1.2rem;
     position: relative;
     z-index: 2;
+    padding: 1rem 1.25rem;
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--background) 90%, transparent);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 28px rgb(0 0 0 / 8%);
 
     @media (max-width: 992px) {
       order: 1;
     }
+  }
+
+  &__buttons .button--outline {
+    background: rgb(255 255 255 / 95%);
+    border-color: var(--btn-primary-bg);
+    color: var(--btn-primary-bg);
+    font-weight: 600;
+    box-shadow: 0 2px 14px rgb(21 50 86 / 18%);
+
+    &:hover {
+      background: var(--btn-primary-bg);
+      border-color: var(--btn-primary-bg);
+      color: #fff;
+    }
+  }
+
+  &__stats {
+    border-top-color: color-mix(in srgb, var(--btn-primary-bg) 28%, transparent);
+  }
+
+  &__stat-number {
+    color: var(--btn-primary-bg);
+    text-shadow: 0 1px 0 rgb(255 255 255 / 90%);
+  }
+
+  &__stat-label {
+    color: color-mix(in srgb, var(--foreground) 88%, var(--btn-primary-bg) 12%);
+    font-weight: 500;
+    text-shadow: 0 1px 10px rgb(255 255 255 / 95%);
   }
 
   &__title {
@@ -238,15 +272,12 @@
     &-number {
       font-size: 2.2rem;
       font-weight: 700;
-      color: var(--primary);
       font-family: var(--font-serif);
       min-height: 2.5rem;
     }
 
     &-label {
       font-size: 0.8rem;
-      color: var(--text-muted);
-      text-shadow: 0 0 12px var(--background);
     }
   }
 

@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/app/providers/ThemeProvider';
 import { StructuredData } from '@/components/StructuredData';
 import { PwaProvider } from '@/components/pwa/PwaProvider';
+import { ChatFab } from '@/components/chat/ChatFab';
 import { SITE, buildOpenGraph, buildTwitter } from '@/lib/seo';
 import '@/styles/globals.scss';
 
@@ -103,6 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </a>
           <StructuredData />
           <PwaProvider />
+          <ChatFab />
           {children}
         </ThemeProvider>
       </body>
