@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/app/providers/ThemeProvider';
 import { StructuredData } from '@/components/StructuredData';
+import { PwaProvider } from '@/components/pwa/PwaProvider';
 import { SITE, buildOpenGraph, buildTwitter } from '@/lib/seo';
 import '@/styles/globals.scss';
 
@@ -82,6 +83,14 @@ export const metadata: Metadata = {
   manifest: '/site.webmanifest',
   category: 'law',
   classification: 'Юридические услуги',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Legal Team',
+  },
+  icons: {
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -93,6 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             Перейти к основному содержанию
           </a>
           <StructuredData />
+          <PwaProvider />
           {children}
         </ThemeProvider>
       </body>

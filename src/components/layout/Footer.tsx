@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { InstallAppLink } from '@/components/pwa/InstallPrompt';
 
 export function Footer() {
   const [showTopBtn, setShowTopBtn] = useState(false);
@@ -92,6 +93,10 @@ export function Footer() {
               <li><Link href="/#pricing" className="footer__link">Стоимость услуг</Link></li>
               <li><Link href="/#faq" className="footer__link">Вопросы и ответы</Link></li>
               <li><Link href="/articles" className="footer__link">Статьи</Link></li>
+              <li><Link href="/chat" className="footer__link">Онлайн-чат</Link></li>
+              <li>
+                <InstallAppLink className="footer__link footer__link--button" />
+              </li>
               <li><Link href="/policies" className="footer__link">Политика конфиденциальности</Link></li>
               <li><Link href="/sitemap.xml" className="footer__link">Карта сайта</Link></li>
             </ul>

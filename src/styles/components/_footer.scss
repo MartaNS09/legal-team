@@ -184,6 +184,14 @@
     &:focus-visible {
       color: var(--secondary);
     }
+
+    &--button {
+      background: none;
+      border: none;
+      font: inherit;
+      cursor: pointer;
+      text-align: left;
+    }
   }
 
   &__bottom {

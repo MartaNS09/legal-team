@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: '/o-nas', label: 'О нас' },
   { href: '/#cases', label: 'Дела' },
   { href: '/articles', label: 'Статьи' },
+  { href: '/chat', label: 'Чат' },
   { href: '/#reviews', label: 'Отзывы' },
   { href: '/#pricing', label: 'Стоимость' },
   { href: '/kontakty', label: 'Контакты' },

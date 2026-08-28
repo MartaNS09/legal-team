@@ -1,0 +1,404 @@
+.chat-list {
+  padding: 2.5rem 0 4rem;
+
+  &__heading {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--foreground);
+    margin-bottom: 0.5rem;
+  }
+
+  &__intro {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    max-width: 42rem;
+  }
+
+  &__grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+
+    @media (min-width: 640px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--background);
+    border: 1px solid var(--gray);
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+
+    &:hover {
+      border-color: var(--primary-light);
+      box-shadow: 0 8px 24px rgb(26 58 107 / 10%);
+      transform: translateY(-2px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+  }
+
+  &__card-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gray-light);
+    border-radius: 50%;
+  }
+
+  &__card-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0 0 0.2rem;
+    color: var(--foreground);
+  }
+
+  &__card-subtitle {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 0 0 0.35rem;
+  }
+
+  &__card-lawyer {
+    font-size: 0.8rem;
+    color: var(--primary);
+    margin: 0;
+  }
+
+  &__card-arrow {
+    font-size: 1.25rem;
+    color: var(--primary-light);
+    flex-shrink: 0;
+  }
+
+  &__note {
+    margin-top: 2rem;
+    padding: 1rem 1.25rem;
+    background: var(--gray-light);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+
+    a {
+      color: var(--primary);
+      font-weight: 500;
+    }
+  }
+}
+
+.chat-room-page {
+  &__section {
+    padding: 0 0 3rem;
+  }
+
+  &__container {
+    max-width: 720px;
+  }
+}
+
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  height: min(72vh, 640px);
+  min-height: 420px;
+  border: 1px solid var(--gray);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--background);
+  box-shadow: 0 12px 40px rgb(0 0 0 / 8%);
+
+  &--loading {
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__loading-text {
+    color: var(--text-muted);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: var(--primary);
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  &__lawyer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(255 255 255 / 15%);
+    border-radius: 50%;
+    font-size: 1.25rem;
+  }
+
+  &__lawyer-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  &__lawyer-role {
+    font-size: 0.8rem;
+    opacity: 0.85;
+  }
+
+  &__online {
+    color: #86efac;
+  }
+
+  &__reset {
+    background: rgb(255 255 255 / 15%);
+    border: none;
+    color: #fff;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background var(--transition);
+
+    &:hover {
+      background: rgb(255 255 255 / 25%);
+    }
+  }
+
+  &__messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: var(--gray-light);
+    scroll-behavior: smooth;
+  }
+
+  &__message {
+    display: flex;
+
+    &--user {
+      justify-content: flex-end;
+
+      .chat-window__bubble {
+        background: var(--primary);
+        color: #fff;
+        border-bottom-right-radius: 4px;
+      }
+
+      .chat-window__time {
+        color: rgb(255 255 255 / 70%);
+      }
+    }
+
+    &--assistant {
+      justify-content: flex-start;
+
+      .chat-window__bubble {
+        background: var(--background);
+        color: var(--foreground);
+        border-bottom-left-radius: 4px;
+        border: 1px solid var(--gray);
+      }
+    }
+  }
+
+  &__bubble {
+    max-width: 85%;
+    padding: 0.75rem 1rem;
+    border-radius: 16px;
+    font-size: 0.925rem;
+    line-height: 1.5;
+
+    p {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    &--typing {
+      padding: 0.85rem 1.25rem;
+    }
+  }
+
+  &__time {
+    display: block;
+    font-size: 0.7rem;
+    margin-top: 0.35rem;
+    color: var(--text-muted);
+    text-align: right;
+  }
+
+  &__dots {
+    display: inline-flex;
+    gap: 4px;
+
+    span {
+      width: 6px;
+      height: 6px;
+      background: var(--text-muted);
+      border-radius: 50%;
+      animation: chat-dot 1.2s infinite ease-in-out;
+
+      &:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+    }
+  }
+
+  &__quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--gray);
+    background: var(--background);
+    flex-shrink: 0;
+  }
+
+  &__quick-btn {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+    border: 1px solid var(--gray);
+    border-radius: 999px;
+    background: var(--gray-light);
+    color: var(--foreground);
+    cursor: pointer;
+    transition: border-color var(--transition), background var(--transition);
+
+    &:hover:not(:disabled) {
+      border-color: var(--primary-light);
+      background: var(--background);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__form {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--gray);
+    background: var(--background);
+    flex-shrink: 0;
+  }
+
+  &__input {
+    flex: 1;
+    resize: none;
+    border: 1px solid var(--gray);
+    border-radius: 12px;
+    padding: 0.65rem 0.85rem;
+    font-family: inherit;
+    font-size: 0.925rem;
+    background: var(--background);
+    color: var(--foreground);
+    line-height: 1.4;
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary-light);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+    }
+  }
+
+  &__send {
+    width: 2.75rem;
+    height: 2.75rem;
+    flex-shrink: 0;
+    align-self: flex-end;
+    border: none;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background var(--transition), opacity var(--transition);
+
+    &:hover:not(:disabled) {
+      background: var(--primary-light);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  &__disclaimer {
+    padding: 0.5rem 1rem 0.75rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin: 0;
+    border-top: 1px solid var(--gray);
+    background: var(--background);
+
+    a {
+      color: var(--primary);
+    }
+  }
+}
+
+@keyframes chat-dot {
+  0%,
+  80%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .chat-window {
+    height: calc(100dvh - 180px);
+    min-height: 360px;
+    border-radius: 12px;
+  }
+}
